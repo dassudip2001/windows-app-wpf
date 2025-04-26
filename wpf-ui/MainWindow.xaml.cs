@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
 
 namespace wpf_ui
 {
@@ -23,6 +25,17 @@ namespace wpf_ui
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void InitWebView()
+        {
+            await webView.EnsureCoreWebView2Async(null);
+
+            // If you're serving Angular app locally (like localhost:4200)
+            //webView.Source = new Uri("http://localhost:4200");
+
+            // OR if you want to load from local files after build
+             webView.Source = new Uri("file:///C:/path-to-your-angular-build/index.html");
         }
     }
 }
